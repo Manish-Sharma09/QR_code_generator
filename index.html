@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="qr-code.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <title>QR Code Generator</title>
+</head>
+<body>
+    <div class="main">
+        <div class="card">
+            <div class="bg">
+                <h3>QR CODE GENERATOR</h3>
+                <input
+                    id="qr_text"
+                    type="text"
+                    name="text"
+                    class="input"
+                    placeholder="Type something here...." />
+                <div class="qrImg" id="qrImgbox" style="display: none;">
+                    <img id="qr_img" src="" alt="QR Code Image">
+                </div>
+                <div id="error" style="color: red; display: none;margin-top: 10px;">Please enter text before generating the QR code.</div>
+                <button onclick="generateQR()" class="btn">
+                    <h4>Click to Generate</h4>
+                </button>
+            </div>
+            <div class="blob"></div>
+        </div>
+    </div>
+
+    <script>
+        let qr_text = document.getElementById("qr_text");
+        let qrImgbox = document.getElementById("qrImgbox");
+        let qr_img = document.getElementById("qr_img");
+        let error = document.getElementById("error");
+
+        function generateQR() {
+            const text = qr_text.value.trim();
+
+            if (text === "") {
+                error.style.display = "block"; 
+                qrImgbox.style.display = "none"; 
+            } else {
+                error.style.display = "none"; 
+                qrImgbox.style.display = "block"; 
+                qr_img.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + text;
+            }
+        }
+    </script>
+</body>
+</html>
